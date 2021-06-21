@@ -13,7 +13,8 @@
         </groups>
         !-->
         <classes>
-            <class name="com.pivocapture.tests.LibraryTest" />
+            <class name="com.pivocapture.tests.LibraryTest.java" />
+    
         </classes>
     </test>
 
