@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="PivoCapture" verbose="1" >
+    <parameter name="config-file" value="src/test/resources/config.properties" />
+    <test name="PivoCaptureTest" >
+        <!--
+        <groups>
+            <run>
+                <include name="abstract" />
+                <include name="demo" />
+            </run>
+        </groups>
+        !-->
+        <classes>
+            <class name="com.pivocapture.tests.LibraryTest" />
+        </classes>
+    </test>
+
+</suite>
