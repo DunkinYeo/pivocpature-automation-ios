@@ -18,7 +18,7 @@ public abstract class BaseTest {
     private static AppiumDriverLocalService service;
     public IOSDriver<WebElement> driver;
 
-    @BeforeSuite
+    @BeforeSuite (groups = { "abstract" })
     public void globalSetup () throws IOException {
         System.out.println("Starting BeforeSuite...");
         
@@ -26,7 +26,7 @@ public abstract class BaseTest {
         service.start();
     }
 
-    @BeforeTest
+    @BeforeTest (groups = { "abstract" })
     public void setUp() throws Exception {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -68,14 +68,14 @@ public abstract class BaseTest {
         //wait = new WebDriverWait(driver, 10);
     }
 
-    @AfterTest
+    @AfterTest (groups = { "abstract" })
     public void tearDown() {
         if (driver != null) {
             driver.quit();
         }
     }
     
-    @AfterSuite
+    @AfterSuite (groups = { "abstract" })
     public void globalTearDown () {
         System.out.println("AfterSuite...");
 

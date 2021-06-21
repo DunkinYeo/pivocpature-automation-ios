@@ -4,14 +4,14 @@
 <suite name="PivoCapture" verbose="1" >
     <parameter name="config-file" value="src/test/resources/config.properties" />
     <test name="PivoCaptureTest" >
-        <!--
+        
         <groups>
             <run>
                 <include name="abstract" />
-                <include name="demo" />
+                <include name="LibraryTest" />
             </run>
         </groups>
-        !-->
+        
         <classes>
             <class name="com.pivocapture.tests.LibraryTest.java" />
     

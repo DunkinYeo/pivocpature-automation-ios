@@ -2,10 +2,8 @@ package app.pivocapture.tests;
 
 import app.pivocapture.views.LibraryView;
 
-import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import static org.junit.Assert.*;
 
@@ -15,7 +13,7 @@ import java.util.Date;
 public class LibraryTest extends BaseTest {
     //private IOSDriver<WebElement> driver;
 
-    @Test
+    @Test (groups = {"LibraryTest"})
     public void verifyLibraryUI() {
         
         try {
@@ -49,7 +47,7 @@ public class LibraryTest extends BaseTest {
         }
     }
 
-    @Test (dependsOnMethods = {"verifyLibraryUI"})
+    @Test (groups = {"LibraryTest"}, dependsOnMethods = {"verifyLibraryUI"})
     public void verifyLibraryFilter() {
         try {
             /////////////////////////////////
