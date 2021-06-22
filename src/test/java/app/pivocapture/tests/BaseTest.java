@@ -28,7 +28,7 @@ public abstract class BaseTest {
 
     @BeforeTest (groups = { "abstract" })
     public void setUp() throws Exception {
-
+        System.out.println("BeforeTest...");
         DesiredCapabilities capabilities = new DesiredCapabilities();
             
         //Real device
@@ -70,6 +70,8 @@ public abstract class BaseTest {
 
     @AfterTest (groups = { "abstract" })
     public void tearDown() {
+        System.out.println("AfterTest...");
+
         if (driver != null) {
             driver.quit();
         }

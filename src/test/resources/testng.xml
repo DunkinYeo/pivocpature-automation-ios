@@ -3,19 +3,30 @@
 
 <suite name="PivoCapture" verbose="1" >
     <parameter name="config-file" value="src/test/resources/config.properties" />
-    <test name="PivoCaptureTest" >
-        
+    <test name="LibraryTest" >
         <groups>
             <run>
                 <include name="abstract" />
                 <include name="LibraryTest" />
+                <exclude name="VideoTest" />
+            </run>
+        </groups>
+        <classes>
+            <class name="app.pivocapture.tests.LibraryTest" /> 
+        </classes>
+    </test>
+    <test name="VideoTest" >        
+        <groups>
+            <run>
+                <include name="abstract" />
+                <exclude name="LibraryTest" />
+                <include name="VideoTest" />
             </run>
         </groups>
         
         <classes>
-            <class name="com.pivocapture.tests.LibraryTest.java" />
-    
+            <class name="app.pivocapture.tests.VideoTest" />
         </classes>
     </test>
-
+    
 </suite>
