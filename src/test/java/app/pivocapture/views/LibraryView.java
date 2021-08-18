@@ -6,10 +6,10 @@ import org.openqa.selenium.WebDriver;
 import io.appium.java_client.ios.IOSElement;
 
 public class LibraryView extends TestLibrary {
-
+    
     private final int SECOND30 = 30;
     //private final int SECOND60 = 60;
-
+    
     private final String LIBRARY_TITLE = "LIBRARY_TITLE";
     private final String ALL_TAB = "ALL_TAB";
     private final String VIDEOS_TAB = "VIDEOS_TAB";

@@ -1,9 +1,13 @@
 package app.pivocapture.tests;
 
 import app.pivocapture.views.LibraryView;
-
+import io.appium.java_client.MobileBy;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 import static org.junit.Assert.*;
 

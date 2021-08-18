@@ -1,10 +1,15 @@
 package app.pivocapture.tests;
 
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 
+import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
@@ -37,9 +42,9 @@ public abstract class BaseTest {
         capabilities.setCapability("automationName", "XCUITest");
         capabilities.setCapability("platformName", "iOS");
         capabilities.setCapability("platformVersion", "14.6");
-        capabilities.setCapability("deviceName", "iPhone SE2");
+        capabilities.setCapability("deviceName", "iPhone 12 Pro");
         capabilities.setCapability("bundleId", "app.pivo.ios.capture");
-        capabilities.setCapability("udid", "00008030-001005840E83802E");
+        capabilities.setCapability("udid", "00008101-000144580E52001E");
         //capabilities.setCapability("agentPath", "/opt/homebrew/lib/node_modules/appium/node_modules/appium-webdriveragent/WebDriverAgent.xcodeproj");
         //capabilities.setCapability("bootStrapPath", "/opt/homebrew/lib/node_modules/appium/node_modules/appium-webdriveragent");
         
@@ -67,6 +72,9 @@ public abstract class BaseTest {
 
         //wait = new WebDriverWait(driver, 10);
     }
+    
+
+
 
     @AfterTest (groups = { "abstract" })
     public void tearDown() {
