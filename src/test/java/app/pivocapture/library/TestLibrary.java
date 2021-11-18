@@ -61,5 +61,10 @@ public class TestLibrary {
         IOSElement bSignout = vSetting.getViewElement(driver, "SIGNOUT");
         assertTrue("Cannot find Profile button", bSignout != null);
         bSignout.click();
+        try {
+            Thread.sleep(5000);
+        } catch (Exception e) {
+
+        }
     }
 }
