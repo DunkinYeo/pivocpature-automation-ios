@@ -21,4 +21,9 @@ public class TestLibrary {
         return element;
     }
 
+    public IOSElement findElementByClassChainIDWithWait(WebDriver driver, int second, String classchainId) {
+        IOSElement element = (IOSElement) new WebDriverWait(driver, second)
+                .until(ExpectedConditions.visibilityOfElementLocated(MobileBy.iOSClassChain(classchainId)));
+        return element;
+    }
 }

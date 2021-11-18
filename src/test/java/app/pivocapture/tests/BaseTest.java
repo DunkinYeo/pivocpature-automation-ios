@@ -36,10 +36,10 @@ public abstract class BaseTest {
         capabilities.setCapability("xcodeSigningId", "iPhone Developer");
         capabilities.setCapability("automationName", "XCUITest");
         capabilities.setCapability("platformName", "iOS");
-        capabilities.setCapability("platformVersion", "14.6");
-        capabilities.setCapability("deviceName", "iPhone SE2");
+        capabilities.setCapability("platformVersion", "15.1");
+        capabilities.setCapability("deviceName", "iPhone 12 Pro");
         capabilities.setCapability("bundleId", "app.pivo.ios.capture");
-        capabilities.setCapability("udid", "00008030-001005840E83802E");
+        capabilities.setCapability("udid", "00008101-000144580E52001E");
         //capabilities.setCapability("agentPath", "/opt/homebrew/lib/node_modules/appium/node_modules/appium-webdriveragent/WebDriverAgent.xcodeproj");
         //capabilities.setCapability("bootStrapPath", "/opt/homebrew/lib/node_modules/appium/node_modules/appium-webdriveragent");
         

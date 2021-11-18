@@ -11,7 +11,7 @@ import io.appium.java_client.ios.IOSElement;
 public class VideoTest extends BaseTest {
     //private IOSDriver<WebElement> driver;
 
-    @Test(groups = {"VideoTest"})
+    //@Test(groups = {"VideoTest"})
     public void verifyVideoUI() {
         
         try {

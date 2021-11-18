@@ -13,7 +13,7 @@ import java.util.Date;
 public class LibraryTest extends BaseTest {
     //private IOSDriver<WebElement> driver;
 
-    @Test (groups = {"LibraryTest"})
+    //@Test (groups = {"LibraryTest"})
     public void verifyLibraryUI() {
         
         try {
@@ -47,7 +47,7 @@ public class LibraryTest extends BaseTest {
         }
     }
 
-    @Test (groups = {"LibraryTest"}, dependsOnMethods = {"verifyLibraryUI"})
+    //@Test (groups = {"LibraryTest"}, dependsOnMethods = {"verifyLibraryUI"})
     public void verifyLibraryFilter() {
         try {
             /////////////////////////////////
