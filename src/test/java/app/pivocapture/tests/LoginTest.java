@@ -1,17 +1,13 @@
 package app.pivocapture.tests;
 
+import app.pivocapture.library.TestLibrary;
 import app.pivocapture.views.*;
 import io.appium.java_client.ios.IOSElement;
 import org.testng.annotations.Test;
 
-import java.util.HashMap;
-
 import static org.junit.Assert.*;
 
 public class LoginTest extends BaseTest {
-
-    final int ANIMATION_TIME = 200; // ms
-    static final HashMap<String, String> scrollObject = new HashMap<String, String>();
 
     @Test(groups = {"LoginTest"})
     public void verifyLoginWithPivoAccount() {
@@ -43,27 +39,14 @@ public class LoginTest extends BaseTest {
         assertTrue("Cannot find Password Continue button", bPWContinue != null);
         bPWContinue.click();
 
-        //Gallery View
-        GalleryView vGallery = new GalleryView();
-        IOSElement bProfile = vGallery.getViewElement(driver, "PROFILE");
-        assertTrue("Cannot find Profile button", bProfile != null);
-        bProfile.click();
-
-        //Setting View
-        SettingView vSetting = new SettingView();
-          //Scroll down (actually up with a finger) to show Sign out button
-        scrollObject.put("direction", "up");
+        //Sign out
+        TestLibrary tLib = new TestLibrary();
         try {
-            driver.executeScript("mobile:swipe", scrollObject);
-            Thread.sleep(ANIMATION_TIME); // always allow swipe action to complete
+            tLib.signOut(driver);
         } catch (Exception e) {
-            System.err.println("mobileSwipeScreenIOS(): FAILED\n" + e.getMessage());
-            return;
+            fail("Sign out fail!");
         }
 
-        IOSElement bSignout = vSetting.getViewElement(driver, "SIGNOUT");
-        assertTrue("Cannot find Profile button", bSignout != null);
-        bSignout.click();
     }
 
     public void verifyLoginWithGoogleAccount() {
@@ -95,26 +78,5 @@ public class LoginTest extends BaseTest {
         assertTrue("Cannot find Password Continue button", bPWContinue != null);
         bPWContinue.click();
 
-        //Gallery View
-        GalleryView vGallery = new GalleryView();
-        IOSElement bProfile = vGallery.getViewElement(driver, "PROFILE");
-        assertTrue("Cannot find Profile button", bProfile != null);
-        bProfile.click();
-
-        //Setting View
-        SettingView vSetting = new SettingView();
-        //Scroll down (actually up with a finger) to show Sign out button
-        scrollObject.put("direction", "up");
-        try {
-            driver.executeScript("mobile:swipe", scrollObject);
-            Thread.sleep(ANIMATION_TIME); // always allow swipe action to complete
-        } catch (Exception e) {
-            System.err.println("mobileSwipeScreenIOS(): FAILED\n" + e.getMessage());
-            return;
-        }
-
-        IOSElement bSignout = vSetting.getViewElement(driver, "SIGNOUT");
-        assertTrue("Cannot find Profile button", bSignout != null);
-        bSignout.click();
     }
 }
