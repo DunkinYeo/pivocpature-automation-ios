@@ -1,24 +1,24 @@
 package app.pivocapture.tests;
 
+import app.pivocapture.utils.DesiredCaps;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
+import org.openqa.selenium.remote.Dialect;
+import org.testng.annotations.*;
 
 import java.io.IOException;
 import java.net.URL;
 
 public abstract class BaseTest {
 
+    public IOSDriver driver;
     private static AppiumDriverLocalService service;
-    public IOSDriver<WebElement> driver;
+    private final DesiredCaps desiredCaps = new DesiredCaps();
 
-    @BeforeSuite (groups = { "abstract" })
+    @BeforeSuite
     public void globalSetup () throws IOException {
         System.out.println("Starting BeforeSuite...");
         
@@ -26,49 +26,25 @@ public abstract class BaseTest {
         service.start();
     }
 
-    @BeforeTest (groups = { "abstract" })
-    public void setUp() throws Exception {
+    @BeforeTest
+    @Parameters({"deviceName", "platformVersion", "udid"})
+    public void setUp(String deviceName, String platformVersion, String udid) throws Exception {
         System.out.println("BeforeTest...");
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-            
-        //Real device
-        capabilities.setCapability("xcodeOrgId", "4JQH63J424");
-        capabilities.setCapability("xcodeSigningId", "iPhone Developer");
-        capabilities.setCapability("automationName", "XCUITest");
-        capabilities.setCapability("platformName", "iOS");
-        capabilities.setCapability("platformVersion", "15.1");
-        capabilities.setCapability("deviceName", "iPhone 12 Pro");
-        capabilities.setCapability("bundleId", "app.pivo.ios.capture");
-        capabilities.setCapability("udid", "00008101-000144580E52001E");
-        //capabilities.setCapability("agentPath", "/opt/homebrew/lib/node_modules/appium/node_modules/appium-webdriveragent/WebDriverAgent.xcodeproj");
-        //capabilities.setCapability("bootStrapPath", "/opt/homebrew/lib/node_modules/appium/node_modules/appium-webdriveragent");
-        
-     /* For Simulator
-        File classpathRoot = new File(System.getProperty("user.dir"));
-        File appDir = new File(classpathRoot, "../apps");
-        File app = new File(appDir.getCanonicalPath(), "PivoTour.app");
-        
-        capabilities.setCapability("app", app.getAbsolutePath());
-        capabilities.setCapability("automationName", "XCUITest");
-        capabilities.setCapability("platformName", "iOS");
-        capabilities.setCapability("platformVersion", "14.5");
-        capabilities.setCapability("deviceName", "iPhone Simulator");
-    
-        System.out.println(app.getAbsolutePath());
-    */
+
+        DesiredCapabilities capabilities = desiredCaps.getDesiredCapabilities(deviceName, platformVersion, udid);
 
         try {
-            driver = new IOSDriver<WebElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+            driver = new IOSDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
             //driver = new IOSDriver<WebElement>(getServiceUrl(), capabilities);
 
         } catch (Exception e) {
+            System.out.println(e.getCause());
+            System.out.println(e.getMessage());
             e.printStackTrace();
         }
-
-        //wait = new WebDriverWait(driver, 10);
     }
 
-    @AfterTest (groups = { "abstract" })
+    @AfterTest
     public void tearDown() {
         System.out.println("AfterTest...");
 
@@ -77,7 +53,7 @@ public abstract class BaseTest {
         }
     }
     
-    @AfterSuite (groups = { "abstract" })
+    @AfterSuite
     public void globalTearDown () {
         System.out.println("AfterSuite...");
 

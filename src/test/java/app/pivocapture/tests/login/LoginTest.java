@@ -1,15 +1,57 @@
-package app.pivocapture.tests;
+package app.pivocapture.tests.login;
 
 import app.pivocapture.library.TestLibrary;
+import app.pivocapture.tests.BaseTest;
 import app.pivocapture.views.*;
 import io.appium.java_client.ios.IOSElement;
+import org.junit.Assert;
 import org.testng.annotations.Test;
+import views.FirstView;
+import views.GalleryView;
+import views.LoginView;
+import views.SettingView;
 
 import static org.junit.Assert.*;
 
 public class LoginTest extends BaseTest {
 
-    @Test(groups = {"LoginTest"})
+    FirstView firstView;
+    LoginView loginView;
+    GalleryView galleryView;
+    SettingView settingView;
+
+
+    /*
+    * Refactored by George at Mar 2, 2022
+    *
+    * will keep the previous test script for now.
+    * */
+
+    @Test
+    public void loginPivoAccount() {
+        firstView = new FirstView(driver);
+        loginView = new LoginView(driver);
+        galleryView = new GalleryView(driver);
+        settingView = new SettingView(driver);
+
+        firstView.clickSignInBtn();
+        loginView.enterId("automated.test@3i.ai");
+        loginView.clickContinueBtn();
+        loginView.enterPW("3iDev8593");
+        loginView.clickContinueBtn();
+
+        IOSElement galleryTxt = galleryView.getViewElement("GalleryTxt");
+        Assert.assertTrue("Failed to Redirect to GalleryView", galleryTxt != null);
+
+        galleryView.clickSettingBtn();
+
+        settingView.clickSignOutBtn();
+
+        IOSElement signInBtn = firstView.getViewElement("SignInBtn");
+        Assert.assertTrue("Failed to Redirect to First View", signInBtn != null);
+    }
+
+
     public void verifyLoginWithPivoAccount() {
 
         VeryFirstView vFirstView = new VeryFirstView();
@@ -49,7 +91,7 @@ public class LoginTest extends BaseTest {
 
     }
 
-    @Test(groups = {"LoginTest"})
+
     public void verifyLoginWithGoogleAccount() {
 
         VeryFirstView vFirstView = new VeryFirstView();

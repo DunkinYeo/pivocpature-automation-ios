@@ -1,5 +1,6 @@
-package app.pivocapture.tests;
+package app.pivocapture.tests.gallery;
 
+import app.pivocapture.tests.BaseTest;
 import app.pivocapture.views.LibraryView;
 
 import io.appium.java_client.ios.IOSElement;
