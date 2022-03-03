@@ -3,13 +3,22 @@ package app.pivocapture.tests.login;
 import app.pivocapture.library.TestLibrary;
 import app.pivocapture.tests.BaseTest;
 import app.pivocapture.views.*;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.interactions.touch.TouchActions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 import views.FirstView;
 import views.GalleryView;
 import views.LoginView;
 import views.SettingView;
+
+import java.time.Duration;
 
 import static org.junit.Assert.*;
 
@@ -20,15 +29,14 @@ public class LoginTest extends BaseTest {
     GalleryView galleryView;
     SettingView settingView;
 
-
     /*
     * Refactored by George at Mar 2, 2022
     *
     * will keep the previous test script for now.
     * */
 
-    @Test
-    public void loginPivoAccount() {
+    //@Test
+    public void loginPivo() {
         firstView = new FirstView(driver);
         loginView = new LoginView(driver);
         galleryView = new GalleryView(driver);
@@ -44,14 +52,119 @@ public class LoginTest extends BaseTest {
         Assert.assertTrue("Failed to Redirect to GalleryView", galleryTxt != null);
 
         galleryView.clickSettingBtn();
-
         settingView.clickSignOutBtn();
 
         IOSElement signInBtn = firstView.getViewElement("SignInBtn");
-        Assert.assertTrue("Failed to Redirect to First View", signInBtn != null);
+        Assert.assertTrue("Failed to Redirect to First View: can not find Sign In Button", signInBtn != null);
+    }
+
+    //@Test
+    public void loginGoogle() {
+        WebDriverWait wait = new WebDriverWait(driver, 2);
+
+        /****** Create View Object ******/
+        firstView = new FirstView(driver);
+        loginView = new LoginView(driver);
+        galleryView = new GalleryView(driver);
+        settingView = new SettingView(driver);
+
+        /****** Test Scripts *******/
+        firstView.clickSignInBtn();
+        loginView.clickGoogleBtn();
+        driver.switchTo().alert().accept(); //accpet google signin pop up
+        /* If can not find alert element, try with webdriver wait like below
+        wait.until(ExpectedConditions.alertIsPresent());
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
+        */
+
+        loginView.clickGoogleTest3i();
+
+        IOSElement galleryTxt = galleryView.getViewElement("GalleryTxt");
+        Assert.assertTrue("Failed to Redirect to GalleryView", galleryTxt != null);
+
+        galleryView.clickSettingBtn();
+        settingView.clickSignOutBtn();
+
+        IOSElement signInBtn = firstView.getViewElement("SignInBtn");
+        Assert.assertTrue("Failed to Redirect to First View: can not find Sign In Button", signInBtn != null);
+
     }
 
 
+    //@Test
+    public void loginFB() {
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        /****** Create View Object ******/
+        firstView = new FirstView(driver);
+        loginView = new LoginView(driver);
+        galleryView = new GalleryView(driver);
+        settingView = new SettingView(driver);
+
+        firstView.clickSignInBtn();
+        loginView.clickFacebookBtn();
+
+        wait.until(ExpectedConditions.alertIsPresent());
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
+        loginView.clickFBOpenBtn();
+        loginView.clickFBContinueBtn();
+
+        IOSElement galleryTxt = galleryView.getViewElement("GalleryTxt");
+        Assert.assertTrue("Failed to Redirect to GalleryView", galleryTxt != null);
+
+        galleryView.clickSettingBtn();
+        settingView.clickSignOutBtn();
+
+        IOSElement signInBtn = firstView.getViewElement("SignInBtn");
+        Assert.assertTrue("Failed to Redirect to First View: can not find Sign In Button", signInBtn != null);
+    }
+
+    /*Can not automate apple login ㅠ.ㅠ */
+    //@Test
+    public void loginApple() {
+        TouchAction touchAction = new TouchAction(driver);
+
+        /****** Create View Object ******/
+        firstView = new FirstView(driver);
+        loginView = new LoginView(driver);
+        galleryView = new GalleryView(driver);
+        settingView = new SettingView(driver);
+
+        firstView.clickSignInBtn();
+        loginView.clickAppleBtn();
+        loginView.clickAppleContinueBtn();
+
+        //touchAction.press(PointOption.point(294, 522)).release().perform();
+
+
+        loginView.tapByCoordinates(294, 522);
+        loginView.tapByCoordinates(294, 522);
+        loginView.tapByCoordinates(294, 522);
+
+
+        IOSElement galleryTxt = galleryView.getViewElement("GalleryTxt");
+        Assert.assertTrue("Failed to Redirect to GalleryView", galleryTxt != null);
+
+
+        galleryView.clickSettingBtn();
+        settingView.clickSignOutBtn();
+
+        IOSElement signInBtn = firstView.getViewElement("SignInBtn");
+        Assert.assertTrue("Failed to Redirect to First View: can not find Sign In Button", signInBtn != null);
+
+
+    }
+
+
+
+
+
+
+
+
+
+/* Legacy code
     public void verifyLoginWithPivoAccount() {
 
         VeryFirstView vFirstView = new VeryFirstView();
@@ -94,6 +207,7 @@ public class LoginTest extends BaseTest {
 
     public void verifyLoginWithGoogleAccount() {
 
+
         VeryFirstView vFirstView = new VeryFirstView();
         IOSElement bSignUp = vFirstView.getViewElement(driver, "SIGN UP");
         assertTrue("Cannot find Sign Up button", bSignUp != null);
@@ -109,8 +223,8 @@ public class LoginTest extends BaseTest {
         assertTrue("Cannot find Google Login button", btnGoogleLogin != null);
         btnGoogleLogin.click();
 
-        //Google pop-up
-        driver.switchTo().alert().accept();
+
+
 
         //Google Choose an account view
         GoogleChooseAccountView vGAccount = new GoogleChooseAccountView();
@@ -127,7 +241,6 @@ public class LoginTest extends BaseTest {
         }
     }
 
-/*
     //On hold due to it looks impossible atm (Nov 18)
     //@Test(groups = {"LoginTest"})
     public void verifyLoginWithFBAccount() {
